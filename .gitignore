@@ -1,0 +1,8 @@
+build/
+
+image/
+
+*.nes
+ripper/split
+ripper/extract
+ripper/recompile

@@ -1,0 +1,54 @@
+#include "types.h"
+
+#define SPRITETILE_NULL {-1, -1, 0, 0, 0, 0, 0, -1}
+
+SpriteTile CHARDOWN1_TILES[] = {
+    {0x10, 0x20, 0, 4, 0, 0, 0, 0x02},
+    {0x18, 0x20, 0, 4, 0, 0, 0, 0x03},
+    {0x10, 0x28, 1, 4, 0, 0, 0, 0x10},
+    {0x18, 0x28, 1, 4, 0, 0, 0, 0x11},
+    SPRITETILE_NULL
+};
+
+SpriteTile CHARDOWN2_TILES[] = {
+    {0x10, 0x1F, 0, 4, 0, 0, 0, 0x02},
+    {0x18, 0x1F, 0, 4, 0, 0, 0, 0x03},
+    {0x10, 0x27, 1, 4, 0, 1, 0, 0x11},
+    {0x18, 0x27, 1, 4, 0, 1, 0, 0x10},
+    SPRITETILE_NULL
+};
+
+SpriteDef NINTEN_DOWN1 = {CHARDOWN1_TILES, 0, 1, 3, 1, 0};
+SpriteDef NINTEN_DOWN2 = {CHARDOWN2_TILES, 0, 1, 3, 1, 0};
+
+
+SpriteTile SPRITE_EARTH[] = {
+{0x00, 0x00, 0, 4, 0, 0, 0, 0x00},
+{0x08, 0x00, 0, 4, 0, 0, 0, 0x01},
+{0x10, 0x00, 0, 4, 0, 0, 0, 0x02},
+{0x18, 0x00, 0, 4, 0, 0, 0, 0x03},
+{0x00, 0x08, 0, 4, 0, 0, 0, 0x10},
+{0x08, 0x08, 0, 4, 0, 0, 0, 0x11},
+{0x10, 0x08, 0, 4, 0, 0, 0, 0x12},
+{0x18, 0x08, 0, 4, 0, 0, 0, 0x13},
+{0x00, 0x10, 0, 4, 0, 0, 0, 0x20},
+{0x08, 0x10, 0, 4, 0, 0, 0, 0x21},
+{0x10, 0x10, 0, 4, 0, 0, 0, 0x22},
+{0x18, 0x10, 0, 4, 0, 0, 0, 0x23},
+{0x00, 0x18, 0, 4, 0, 0, 0, 0x30},
+{0x08, 0x18, 0, 4, 0, 0, 0, 0x31},
+{0x10, 0x18, 0, 4, 0, 0, 0, 0x32},
+{0x18, 0x18, 0, 4, 0, 0, 0, 0x33},
+SPRITETILE_NULL
+};
+
+SpriteDef SPRITEDEF_EARTH[] = {
+{SPRITE_EARTH, 4, 0, 0, 0, 0},
+{SPRITE_EARTH, 8, 0, 0, 0, 0},
+{SPRITE_EARTH, 0xc, 0, 0, 0, 0},
+{SPRITE_EARTH, 0x40, 0, 0, 0, 0},
+{SPRITE_EARTH, 0x44, 0, 0, 0, 0},
+{SPRITE_EARTH, 0x48, 0, 0, 0, 0},
+{SPRITE_EARTH, 0x4c, 0, 0, 0, 0},
+};
+

@@ -1,0 +1,7 @@
+#!/bin/bash
+rm -rf build/
+mkdir build/
+cd ripper
+python3 extractor.py e
+cd -
+python3 sdl_format.py

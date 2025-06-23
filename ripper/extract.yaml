@@ -1,0 +1,52 @@
+output: extract/
+types:
+- glob: [split/dialogue/**/*.bin]
+  extension: .dia
+  class: DialogueIO
+  recompile: yes
+- glob: [split/statuses/*.bin, split/items/names/*.bin,
+        split/choicers/names/*.bin, split/psi/names/*.bin,
+        split/battle/names/*.bin]
+  extension: .txt
+  class: NameEntryIO
+  recompile: yes
+
+- glob: [split/battle/stats/*.bin]
+  extension: .yaml
+  class: BattleStatIO
+  recompile: yes
+- glob: [split/items/data/*.bin]
+  extension: .yaml
+  class: ItemIO
+  recompile: yes
+- glob: [split/psi/data/*.bin]
+  extension: .yaml
+  class: PsiIO
+  recompile: yes
+- glob: [split/choicers/data/*.bin]
+  extension: .yaml
+  class: ChoicerIO
+  recompile: yes
+- glob: [split/text_pointers.bin]
+  extension: .txt
+  class: TextPointersIO
+  recompile: yes
+
+- glob: [split/battle/battles/*.bin]
+  extension: .yaml
+  class: BattleIO
+  recompile: yes
+
+- glob: [split/sprites/tiles/*.bin, split/sprites/tiles/**/*.bin]
+  extension: .yaml
+  class: SpriteTileIO
+  recompile: yes
+- glob: [split/sprites/defs/*.bin, split/sprites/defs/**/*.bin]
+  extension: .yaml
+  class: SpriteDefinitionIO
+  recompile: yes
+
+- glob: [split/map.bin]
+  extension: .yaml
+  class: MapIO
+  recompile: yes

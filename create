@@ -1,0 +1,13 @@
+#!/bin/bash
+cd build
+cmake ..
+if make; then
+    rm -rf image/
+    cp -R ../image/ image/
+    cp -R ../palettes/ palettes/
+    cd ..
+    build/basic-c-sdl-game
+else
+    rm -rf image/
+    cd ..
+fi

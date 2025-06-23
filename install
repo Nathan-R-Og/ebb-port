@@ -1,0 +1,20 @@
+#!/bin/bash
+sudo apt install git
+sudo apt install build-essential
+sudo apt install pkg-config
+sudo apt install cmake
+sudo apt install cmake-data
+sudo apt install libsdl2-dev
+sudo apt install libsdl2-gfx-dev
+
+sudo apt install imagemagick-6.q16
+
+sudo apt install mingw-w64
+sudo apt install mingw-w64-tools
+sudo apt install g++-mingw-w64-i686
+sudo apt install g++-mingw-w64-x86-64
+
+#rm -rf SDL2-2.32.8
+#wget https://github.com/libsdl-org/SDL/releases/download/release-2.32.8/SDL2-devel-2.32.8-mingw.tar.gz
+#clean up
+#tar -xvzf SDL2-devel-2.32.8-mingw.tar.gz && rm -rf SDL2-devel-2.32.8-mingw.tar.gz
