@@ -101,8 +101,7 @@ if __name__ == "__main__":
         print(f"PIL'ing {image}...")
 
         paletted_img = img.convert("RGB").quantize(colors=4)
-        current_palette = paletted_img.getpalette()
-        current_palette.sort()
+        current_palette = [0,0,0, 0x66,0x66,0x66, 0xad,0xad,0xad, 0xff,0xfe,0xff]
 
         p_img = Image.new('P', (1, 1))
         p_img.putpalette(current_palette)

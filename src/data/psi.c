@@ -1,8 +1,7 @@
 #include <stdio.h>
 #include <stdbool.h>
 #include "types.h"
-
-extern char STATUS_FAINTD[];
+#include "data/psi.h"
 
 char PSI_TELEPATHY[] = "Telepathy";
 char PSI_TELEPORT[] = "Teleport";
@@ -49,22 +48,6 @@ char PSI_PK_BEAM_OMEGA[] = "PK Beam Ω";
 char PSI_PK_THUNDERALPHA[] = "PK Thunderα";
 char PSI_PK_THUNDERBETA[] = "PK Thunderβ";
 char PSI_PK_THUNDERGAMMA[] = "PK Thunderγ";
-
-//psi data
-//TODO: what does arg5 do???????
-//NOTE- battleEffect uses BATTLE_ACTION_POINTERS as an array.
-//(or at least i think it does)
-//also i only made a macro out of this because i dont wanna seperate one word and six bytes
-typedef struct psiDef {
-    char* name;
-    u8 nintenLevel;
-    u8 anaLevel;
-    u8 overworldEffect;
-    u8 battleEffect;
-    u8 arg5;
-    u8 cost;
-} psiDef;
-
 
 psiDef PSI_Data[] = {
 {    GENERIC_STR_NULL,-1,-1,0x00,0x00,0x00,0},

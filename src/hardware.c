@@ -1,10 +1,14 @@
-#include "types.h"
-#include "utils.h"
-#include "sdl.h"
 #include "hardware.h"
+#include "common_structs.h"
 
+SDL_Surface* map_bg_table[8];
+SDL_Surface* npc_sprite_table[2];
+TILEMAP_BLOCK TILEMAP[4];
+OAM_Sprite SHADOW_OAM[MAX_OAM];
+u8 controller_pad = 0;
+u8 controller_pad_frame = 0;
 SDL_Color nes_palette[0x40];
-
+SDL_Color default_transparent = {0,0,0,0};
 u8 global_bg_palette[4][4];
 u8 global_sprite_palette[4][4];
 
@@ -40,7 +44,6 @@ void load_palette(u8 which, u8* data, u8 entries){
     }
 }
 
-SDL_Color default_transparent = {0,0,0,0};
 SDL_Color Color_From_Id(u8 id){
     if (id == 0xff){
         return default_transparent;
@@ -59,8 +62,6 @@ void Palette_From_Nes(u8* id, SDL_Palette* to){
     SDL_SetPaletteColors(to, new, 0, 4);
 }
 
-extern char path[]; //generic path memory
-void get_realpath(char* in);
 void update_palette(char* inpath){
     FILE *filePointer;
     u8 buffer[0xc0]; // Buffer to store data
@@ -87,19 +88,6 @@ void update_palette(char* inpath){
     fclose(filePointer);
 }
 
-SDL_Surface* map_bg_table[8];
-SDL_Surface* npc_sprite_table[2];
-
-TILEMAP_BLOCK TILEMAP[4];
-
-#define MAX_OAM 64
-OAM_Sprite SHADOW_OAM[MAX_OAM];
-
-u8 controller_pad = 0;
-u8 controller_pad_frame = 0;
-
-// Event loop exit flag
-extern bool main_quit;
 void CheckInput(void){
     bool quit = false;
 
@@ -207,6 +195,12 @@ void CheckInput(void){
 //NOTE: SDL2 does not support flipping surfaces. gulp
 //rendercopyex should be fine for now...
 void OAM_Draw(SDL_Renderer *renderer){
+    SDL_Palette* current_palette[4];
+    for(u8 i = 0; i < 4; i++){
+        current_palette[i] = SDL_AllocPalette(4);
+        Palette_From_Nes(global_sprite_palette[i], current_palette[i]);
+    }
+
     //emulate OAM
     OAM_Sprite* current_oam = &SHADOW_OAM[0];
     for (int i = 0; i < MAX_OAM; i++, current_oam++){
@@ -226,9 +220,7 @@ void OAM_Draw(SDL_Renderer *renderer){
 
         int use_palette = current_oam->attributes & 3;
 
-        SDL_Palette* oopsies = SDL_AllocPalette(4);
-        Palette_From_Nes(global_sprite_palette[use_palette], oopsies);
-        SDL_SetSurfacePalette(use_sheet, oopsies);
+        SDL_SetSurfacePalette(use_sheet, current_palette[use_palette]);
 
         int flipargs = SDL_FLIP_NONE;
         if (current_oam->attributes & 0x40){
@@ -244,5 +236,6 @@ void OAM_Draw(SDL_Renderer *renderer){
             //Make a target texture to render to
             SDL_RenderCopyEx(renderer, sprite, &in_rect, &out_rect, 0, NULL, flipargs);
         }
+        SDL_DestroyTexture(sprite);
     }
 }

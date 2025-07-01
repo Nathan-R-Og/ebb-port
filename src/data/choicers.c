@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdbool.h>
 #include "types.h"
+#include "data/choicers.h"
 
 char CHOICER_FLIGHTPLANSA[] = "FlightplanA";
 char CHOICER_FLIGHTPLANSB[] = "FlightplanB";
@@ -21,23 +22,6 @@ char TELEPORT_SNOWMAN[] = "Snowman";
 char TELEPORT_YOUNGTOWN[] = "Youngtown";
 char TELEPORT_ELLAY[] = "Ellay";
 char TELEPORT_UNION[] = "Union";
-
-//only changes here is that in jp, there are unused choicers
-//4 options all of which say "POISON"
-//very ominous
-
-
-//not JUST teleport defs, by the way!
-//name, (posX << 6)| music, (posY << 6)| startDirection, msgPrice
-
-typedef struct choicerDef{
-    char* name;
-    u8 music;
-    u16 posX;
-    Direction direction;
-    u16 posY;
-    u16 msgPrice;
-} choicerDef;
 
 //ACTUAL teleport defs
 choicerDef CHOICERS[] = {

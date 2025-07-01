@@ -1,6 +1,5 @@
 #include "types.h"
-
-#define SPRITETILE_NULL {-1, -1, 0, 0, 0, 0, 0, -1}
+#include "data/sprites.h"
 
 SpriteTile CHARDOWN1_TILES[] = {
     {0x10, 0x20, 0, 4, 0, 0, 0, 0x02},

@@ -1,15 +1,19 @@
-#include <stdio.h>
-#include <stdbool.h>
-
-#include <stdio.h>
-
-#include "sdl.h"
+#include "main.h"
 #include "game.h"
 
 // Define screen dimensions
 #define SCREEN_WIDTH    240
 #define SCREEN_HEIGHT   224
 
+char GENERIC_STR_NULL[1] = {0};
+char* basepath;
+char path[256]; //generic path memory
+bool main_quit = false; // Event loop exit flag
+
+void get_realpath(char* in){
+    memset(path, 0, sizeof(path));
+    snprintf(path, sizeof(path), in, basepath);
+}
 
 int main(int argc, char* argv[])
 {
@@ -65,6 +69,9 @@ int main(int argc, char* argv[])
 
             SDL_RenderSetLogicalSize(renderer, SCREEN_WIDTH, SCREEN_HEIGHT);
             SDL_RenderSetIntegerScale(renderer, true);
+
+            basepath = SDL_GetBasePath();
+
             // Start the game
             Game_start(renderer);
 
@@ -82,4 +89,60 @@ int main(int argc, char* argv[])
     SDL_Quit();
 
     return 0;
+}
+
+void Utils_setBackgroundColor(SDL_Renderer *renderer, SDL_Color color)
+{
+    // Initialize renderer color
+    SDL_SetRenderDrawColor(renderer, color.r, color.g, color.b, color.a);
+
+    // Clear screen
+    SDL_RenderClear(renderer);
+}
+
+long long Utils_time()
+{
+    struct timespec t;
+    clock_gettime(CLOCK_MONOTONIC_RAW, &t);
+    return t.tv_sec * 1000 + t.tv_nsec / 1000000;
+}
+
+void Utils_randInit()
+{
+    srand(time(NULL));
+}
+
+int Utils_rand(int min, int max)
+{
+    return ( rand() % (max + 1) ) + min;
+}
+
+bool Utils_equalColors(SDL_Color color1, SDL_Color color2)
+{
+    //return color1.r == color2.r && color1.g == color2.g && color1.b == color2.b && color1.a == color2.a;
+    return *((Sint32 *) &color1) == *((Sint32 *) &color2);
+}
+
+SDL_Surface* surface_from_path(char* path){
+    SDL_Surface* loadedSurface = IMG_Load(path);
+    if( loadedSurface == NULL )
+    {
+        printf( "Unable to load image %s! SDL_image Error: %s\n", path, IMG_GetError() );
+        return NULL;
+    }
+    return loadedSurface;
+}
+
+SDL_Texture* texture_from_surface(SDL_Surface* surface, SDL_Renderer *renderer){
+    return SDL_CreateTextureFromSurface(renderer, surface);
+}
+
+SDL_Texture* texture_from_path(char* path, SDL_Renderer *renderer){
+    SDL_Texture* loadedTexture = IMG_LoadTexture(renderer, path);
+    if( loadedTexture == NULL )
+    {
+        printf( "Unable to load image %s! SDL_image Error: %s\n", path, IMG_GetError() );
+        return NULL;
+    }
+    return loadedTexture;
 }

@@ -5,6 +5,8 @@ Currently only for Ubuntu Linux.
 
 Run `./install` to install all dependencies.
 
+To extract assets, put a valid rom in `ripper/`.
+
 Run `./setup` to make or refresh the `build/` directory, as well as extract assets.
 
 Run `./create` to build and run the game.
